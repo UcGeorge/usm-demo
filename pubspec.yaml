@@ -45,7 +45,7 @@ flutter_icons:
   min_sdk_android: 21 # android min sdk min:16, default 21
   web:
     generate: true
-    image_path: "assets/icon/icon.png"
+    image_path: "assets/icon/icon-transparent.png"
     background_color: "#hexcode"
     theme_color: "#hexcode"
   windows:
@@ -74,7 +74,7 @@ flutter_native_splash:
   # the leading # character.
   # The image parameter allows you to specify an image used in the splash screen.  It must be a
   # png file and should be sized for 4x pixel density.
-  image: assets/icon/icon.png
+  image: assets/icon/icon-transparent.png
 
   # The branding property allows you to specify an image used as branding in the splash screen.
   # It must be a png file. It is supported for Android, iOS and the Web.  For Android 12,

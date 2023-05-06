@@ -54,10 +54,10 @@ class MyApp extends StatelessWidget {
       },
       child: const AlertWrapper(
         app: MaterialApp(
-          title: 'Flutter App Template',
+          title: 'USM Demo',
           debugShowCheckedModeBanner: false,
           home: CounterPage(
-            title: "Flutter App Template",
+            title: "USM Demo",
           ),
         ),
       ),
