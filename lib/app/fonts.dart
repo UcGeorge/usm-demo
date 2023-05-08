@@ -2,24 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppFonts {
-  static TextStyle clashDisplay = const TextStyle(
+  static TextStyle clashDisplay = TextStyle(
     fontFamily: "ClashDisplay",
-    height: 1.364,
+    height: lineHeight,
   );
 
-  static TextStyle montserrat = GoogleFonts.montserrat(height: 1.364);
-  static TextStyle nunito = const TextStyle(
+  static TextStyle montserrat = GoogleFonts.montserrat(height: lineHeight);
+  static TextStyle nunito = TextStyle(
     fontFamily: "Nunito",
-    height: 1.364,
+    height: lineHeight,
   );
 
-  static TextStyle poppins = const TextStyle(
+  static TextStyle poppins = TextStyle(
     fontFamily: "Poppins",
-    height: 1.364,
+    height: lineHeight,
   );
 
-  static TextStyle sora = const TextStyle(
+  static TextStyle sora = TextStyle(
     fontFamily: "Sora",
-    height: 1.364,
+    height: lineHeight,
   );
+
+  static double get lineHeight => 1.364;
 }

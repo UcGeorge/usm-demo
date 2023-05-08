@@ -1,10 +1,12 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../app/colors.dart';
 import '../../../../app/fonts.dart';
 import '../../../../app/types.dart';
+import '../../usm_demo.flow.dart';
 import '../control.dart';
 
 extension ControlWidgets on ControlCenterState {
@@ -185,8 +187,10 @@ extension ControlWidgets on ControlCenterState {
                       toggleable: true,
                       groupValue: weighted,
                       onChanged: (val) {
-                        widget.flow.clearEdges();
-                        widget.flow.weighted.update(val ?? false);
+                        if (widget.flow.searchMethod.value != Usm.ucs) {
+                          widget.flow.clearEdges();
+                          widget.flow.weighted.update(val ?? false);
+                        }
                       },
                     ),
                     Text(
@@ -204,6 +208,35 @@ extension ControlWidgets on ControlCenterState {
           ),
         ],
       ),
+    );
+  }
+
+  StreamBuilder<bool> buildResetButton() {
+    return StreamBuilder<bool>(
+      stream: widget.flow.canReset.stream,
+      initialData: widget.flow.canReset.value,
+      builder: (context, snapshot) {
+        final canReset = snapshot.data!;
+        return canReset
+            ? InkWell(
+                onTap: widget.flow.resetGraph,
+                child: Container(
+                  height: 52,
+                  width: 52,
+                  decoration: BoxDecoration(
+                    color: Colors.orange,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Center(
+                    child: Icon(
+                      Iconsax.refresh,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ).animate().fadeIn()
+            : const SizedBox.shrink();
+      },
     );
   }
 }

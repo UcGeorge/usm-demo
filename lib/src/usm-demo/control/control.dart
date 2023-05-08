@@ -97,6 +97,8 @@ class ControlCenterState extends State<ControlCenter> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        buildResetButton(),
+                        const SizedBox(width: 16),
                         PlayButton(flow: widget.flow),
                         const SizedBox(width: 16),
                         buildClearGraphButton(),
