@@ -71,6 +71,19 @@ class UsmDemoFlow {
     graph.mutate((state) => state.putIfAbsent(vertex, () => <String>{}));
   }
 
+  void moveVertex(Offset position, Vertex vertex) {
+    vertexColorMap[vertex] = Colors.black;
+
+    positions.mutate(
+      (state) => state.update(
+        vertex,
+        (oldPosition) => position,
+        ifAbsent: () => position,
+      ),
+    );
+    graph.mutate((state) => state);
+  }
+
   void createEdge(Vertex vertex, BuildContext context) async {
     final sVertex = selectedVertex.value;
 

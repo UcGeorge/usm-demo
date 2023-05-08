@@ -31,35 +31,41 @@ class VertexLayer extends StatelessWidget {
           return InkWell(
             borderRadius: BorderRadius.circular(vertexRadius),
             onDoubleTap: () => flow.createEdge(vertex, context),
-            child: StreamBuilder<Vertex?>(
-              stream: flow.root.stream,
-              initialData: flow.root.value,
-              builder: (context, rootSnapshot) {
-                final root = rootSnapshot.data;
-                return StreamBuilder<Vertex?>(
-                  stream: flow.goal.stream,
-                  initialData: flow.goal.value,
-                  builder: (context, goalSnapshot) {
-                    final goal = goalSnapshot.data;
-                    return CircleAvatar(
-                      radius: vertexRadius,
-                      backgroundColor: () {
-                        if (vertex == selectedVertex) return Colors.blue;
-                        if (vertex == root) return Colors.red;
-                        if (vertex == goal) return Colors.green;
-                        return flow.vertexColorMap[vertex];
-                      }.call(),
-                      child: Text(
-                        vertex,
-                        style: AppFonts.nunito.copyWith(
-                          fontSize: 24,
-                          color: AppColors.white,
+            child: GestureDetector(
+              onVerticalDragUpdate: (details) =>
+                  flow.moveVertex(details.globalPosition, vertex),
+              onHorizontalDragUpdate: (details) =>
+                  flow.moveVertex(details.globalPosition, vertex),
+              child: StreamBuilder<Vertex?>(
+                stream: flow.root.stream,
+                initialData: flow.root.value,
+                builder: (context, rootSnapshot) {
+                  final root = rootSnapshot.data;
+                  return StreamBuilder<Vertex?>(
+                    stream: flow.goal.stream,
+                    initialData: flow.goal.value,
+                    builder: (context, goalSnapshot) {
+                      final goal = goalSnapshot.data;
+                      return CircleAvatar(
+                        radius: vertexRadius,
+                        backgroundColor: () {
+                          if (vertex == selectedVertex) return Colors.blue;
+                          if (vertex == root) return Colors.red;
+                          if (vertex == goal) return Colors.green;
+                          return flow.vertexColorMap[vertex];
+                        }.call(),
+                        child: Text(
+                          vertex,
+                          style: AppFonts.nunito.copyWith(
+                            fontSize: 24,
+                            color: AppColors.white,
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                );
-              },
+                      );
+                    },
+                  );
+                },
+              ),
             ),
           );
         },
