@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_assist/flutter_assist.dart';
 import 'package:scaled_app/scaled_app.dart';
 
 import 'src/alert/alert.dart';
-import 'src/counter/counter.dart';
+import 'src/usm-demo/usm_demo.flow.dart';
+import 'src/usm-demo/usm_demo.view.dart';
 
 void main() async {
   LogUtil.init();
@@ -14,7 +14,7 @@ void main() async {
   ScaledWidgetsFlutterBinding.ensureInitialized(
     scaleFactor: (deviceSize) {
       // screen width used in your UI design
-      const double widthOfDesign = 1080;
+      const double widthOfDesign = 1920;
       return deviceSize.width / widthOfDesign;
     },
   );
@@ -31,8 +31,8 @@ void main() async {
   //*   }
   //* }
 
-  Animate.restartOnHotReload =
-      true; //? This makes all animations from flutter_animate restart on hot reload
+  // Animate.restartOnHotReload =
+  //     true; //? This makes all animations from flutter_animate restart on hot reload
 
   LogUtil.devLog("main", message: "Running app");
   runApp(const MyApp());
@@ -52,12 +52,13 @@ class MyApp extends StatelessWidget {
           SystemChannels.textInput.invokeMethod('TextInput.hide');
         }
       },
-      child: const AlertWrapper(
+      child: AlertWrapper(
         app: MaterialApp(
           title: 'USM Demo',
           debugShowCheckedModeBanner: false,
-          home: CounterPage(
-            title: "USM Demo",
+          home: UsmDemoView(
+            key: GlobalKey(),
+            flow: UsmDemoFlow(),
           ),
         ),
       ),
